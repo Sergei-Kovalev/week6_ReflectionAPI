@@ -3,6 +3,7 @@ package com.gmail.kovalev.dao.impl;
 import com.gmail.kovalev.config.Config;
 import com.gmail.kovalev.dao.FacultyDAO;
 import com.gmail.kovalev.entity.Faculty;
+import com.gmail.kovalev.exception.FacultyNotFoundException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,13 +20,13 @@ public class FacultyDAOImpl implements FacultyDAO {
     private final static String FIND_ALL = "SELECT * FROM faculties";
 
     private final static String SAVE_NEW_FACULTY = """
-            INSERT INTO faculties(id, name, teacher, actual_visitors, max_visitors, price_per_day)
-            VALUES (?, ?, ?, ?, ?, ?);
+            INSERT INTO faculties(id, name, teacher, email, actual_visitors, max_visitors, price_per_day)
+            VALUES (?, ?, ?, ?, ?, ?, ?);
             """;
 
     private final static String UPDATE_FACULTY = """
             UPDATE faculties
-            SET name = ?, teacher = ?, actual_visitors = ?, max_visitors = ?, price_per_day = ?
+            SET name = ?, teacher = ?, email = ?, actual_visitors = ?, max_visitors = ?, price_per_day = ?
             WHERE id = ?;
             """;
 
@@ -43,6 +44,9 @@ public class FacultyDAOImpl implements FacultyDAO {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+        if (faculty.getId() == null) {
+            throw new FacultyNotFoundException(uuid.toString());
         }
         return faculty;
     }
@@ -73,9 +77,10 @@ public class FacultyDAOImpl implements FacultyDAO {
             statement.setObject(1, uuid);
             statement.setString(2, faculty.getName());
             statement.setString(3, faculty.getTeacher());
-            statement.setInt(4, faculty.getActualVisitors());
-            statement.setInt(5, faculty.getMaxVisitors());
-            statement.setDouble(6, faculty.getPricePerDay());
+            statement.setString(4, faculty.getEmail());
+            statement.setInt(5, faculty.getActualVisitors());
+            statement.setInt(6, faculty.getMaxVisitors());
+            statement.setDouble(7, faculty.getPricePerDay());
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -91,10 +96,11 @@ public class FacultyDAOImpl implements FacultyDAO {
             PreparedStatement statement = connection.prepareStatement(UPDATE_FACULTY);
             statement.setString(1, faculty.getName());
             statement.setString(2, faculty.getTeacher());
-            statement.setInt(3, faculty.getActualVisitors());
-            statement.setInt(4, faculty.getMaxVisitors());
-            statement.setDouble(5, faculty.getPricePerDay());
-            statement.setObject(6, faculty.getId());
+            statement.setString(3, faculty.getEmail());
+            statement.setInt(4, faculty.getActualVisitors());
+            statement.setInt(5, faculty.getMaxVisitors());
+            statement.setDouble(6, faculty.getPricePerDay());
+            statement.setObject(7, faculty.getId());
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -120,6 +126,7 @@ public class FacultyDAOImpl implements FacultyDAO {
         faculty.setId(UUID.fromString(resultSet.getString("id")));
         faculty.setName(resultSet.getString("name"));
         faculty.setTeacher(resultSet.getString("teacher"));
+        faculty.setEmail(resultSet.getString("email"));
         faculty.setActualVisitors(resultSet.getInt("actual_visitors"));
         faculty.setMaxVisitors(resultSet.getInt("max_visitors"));
         faculty.setPricePerDay(resultSet.getDouble("price_per_day"));

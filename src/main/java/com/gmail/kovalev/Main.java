@@ -14,14 +14,15 @@ public class Main {
         System.out.println(allFaculties);
         System.out.println("------------------------------------------------------");
 
-
+//
 //        String jsonForSave = """
 //                {
-//                  "name": "NanoTech",
+//                  "name": "Economic",
 //                  "teacher": "Petrov Ivan Afeevich",
-//                  "actualVisitors": 11,
-//                  "maxVisitors": 20,
-//                  "pricePerDay": 6.72
+//                  "email": "econo-my647@yahoo.com",
+//                  "actualVisitors": 10,
+//                  "maxVisitors": 15,
+//                  "pricePerDay": 9.99
 //                }
 //                """;
 //
@@ -29,11 +30,12 @@ public class Main {
 //        System.out.println(report1);
 //        System.out.println("------------------------------------------------------");
 
-//        String uuid = "197caaa5-25ac-4daf-a395-6d28f98b8b4b";
+//        String uuid = "773dcbc0-d2fa-45b4-acf8-485b682adedd";
 //        String jsonForUpdate = """
 //                 {
 //                  "name": "Culture",
 //                  "teacher": "Karamzina Anna Ivanovna",
+//                  "email": "culture@yahoo.com",
 //                  "actualVisitors": 20,
 //                  "maxVisitors": 21,
 //                  "pricePerDay": 9.99

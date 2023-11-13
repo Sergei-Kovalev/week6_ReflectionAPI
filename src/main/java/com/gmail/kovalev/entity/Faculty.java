@@ -18,6 +18,7 @@ public class Faculty {
     private UUID id;
     private String name;
     private String teacher;
+    private String email;
     private Integer actualVisitors;
     private Integer maxVisitors;
     private Double pricePerDay;

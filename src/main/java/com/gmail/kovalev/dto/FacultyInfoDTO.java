@@ -6,6 +6,7 @@ public record FacultyInfoDTO(
         UUID id,
         String name,
         String teacher,
+        String email,
         Integer freePlaces,
         Double pricePerDay) {
 }
