@@ -22,5 +22,4 @@ public interface FacultyMapper {
     default Integer facultyToFreePlaces(Faculty faculty) {
         return faculty.getMaxVisitors() - faculty.getActualVisitors();
     }
-
 }

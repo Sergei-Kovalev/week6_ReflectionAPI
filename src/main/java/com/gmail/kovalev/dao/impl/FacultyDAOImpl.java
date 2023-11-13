@@ -82,7 +82,7 @@ public class FacultyDAOImpl implements FacultyDAO {
             throw new RuntimeException(e);
         }
         faculty.setId(uuid);
-        return "The faculty " + faculty.getName() + " has been saved in the database with UUID = " + uuid;
+        return "The faculty " + faculty.getName() + " has been saved in the database with UUID: " + uuid;
     }
 
     @Override
@@ -100,7 +100,7 @@ public class FacultyDAOImpl implements FacultyDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return "The faculty with UUID = " + faculty.getId().toString() + " has been updated in the database.";
+        return "The faculty with UUID: " + faculty.getId().toString() + " has been updated in the database.";
     }
 
     @Override
@@ -113,7 +113,7 @@ public class FacultyDAOImpl implements FacultyDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return "The faculty with UUID = " + uuid + " has been deleted.";
+        return "The faculty with UUID: " + uuid + " has been deleted.";
     }
 
     private static void fillFacultyFields(Faculty faculty, ResultSet resultSet) throws SQLException {

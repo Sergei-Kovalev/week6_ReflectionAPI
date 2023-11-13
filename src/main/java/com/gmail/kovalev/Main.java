@@ -1,38 +1,50 @@
 package com.gmail.kovalev;
 
-import com.gmail.kovalev.dao.impl.FacultyDAOImpl;
-import com.gmail.kovalev.dto.FacultyInfoDTO;
-import com.gmail.kovalev.mapper.impl.FacultyMapperImpl;
-import com.gmail.kovalev.service.FacultyService;
-import com.gmail.kovalev.service.impl.FacultyServiceImpl;
-
-import java.util.List;
-import java.util.UUID;
+import com.gmail.kovalev.controller.Controller;
 
 public class Main {
     public static void main(String[] args) {
-        FacultyService service = new FacultyServiceImpl(new FacultyMapperImpl(), new FacultyDAOImpl());
+        Controller controller = new Controller();
 
-        FacultyInfoDTO facultyById = service.findFacultyById(UUID.fromString("773dcbc0-d2fa-45b4-acf8-485b682adedd"));
+        String facultyById = controller.findFacultyById("773dcbc0-d2fa-45b4-acf8-485b682adedd");
         System.out.println(facultyById);
         System.out.println("------------------------------------------------------");
 
-        List<FacultyInfoDTO> allFaculties = service.findAllFaculties();
-        allFaculties.forEach(System.out::println);
+        String allFaculties = controller.findAllFaculties();
+        System.out.println(allFaculties);
         System.out.println("------------------------------------------------------");
+
+
+//        String jsonForSave = """
+//                {
+//                  "name": "NanoTech",
+//                  "teacher": "Petrov Ivan Afeevich",
+//                  "actualVisitors": 11,
+//                  "maxVisitors": 20,
+//                  "pricePerDay": 6.72
+//                }
+//                """;
 //
-//        String report1 = service.saveFaculty(new FacultyDTO("Chemistry", "Ozonov Evgeniy Dossantovich", 14, 15, 11.1));
+//        String report1 = controller.saveFaculty(jsonForSave);
 //        System.out.println(report1);
 //        System.out.println("------------------------------------------------------");
+
+//        String uuid = "197caaa5-25ac-4daf-a395-6d28f98b8b4b";
+//        String jsonForUpdate = """
+//                 {
+//                  "name": "Culture",
+//                  "teacher": "Karamzina Anna Ivanovna",
+//                  "actualVisitors": 20,
+//                  "maxVisitors": 21,
+//                  "pricePerDay": 9.99
+//                 }
+//                """;
 //
-//        UUID uuid = UUID.fromString("8d8cfc84-e77c-4722-b4d6-8e9fdc17c721");
-//        FacultyDTO facultyDTO = new FacultyDTO("Bio", "Kasatkin Petr Efimovich", 5, 9, 66.2);
-//
-//        String report2 = service.updateFaculty(uuid, facultyDTO);
+//        String report2 = controller.updateFaculty(uuid, jsonForUpdate);
 //        System.out.println(report2);
 //        System.out.println("------------------------------------------------------");
 //
-//        String s = service.deleteFacultyByUUID(UUID.fromString("829f90c8-4b90-4f54-bb6e-adddf6baa1aa"));
+//        String s = controller.deleteFacultyByUUID("c118621b-4e46-41b4-a872-a82eb21504e2");
 //        System.out.println(s);
 //        System.out.println("------------------------------------------------------");
 

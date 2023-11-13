@@ -1,22 +1,27 @@
 package com.gmail.kovalev.service.impl;
 
 import com.gmail.kovalev.dao.FacultyDAO;
+import com.gmail.kovalev.dao.impl.FacultyDAOImpl;
 import com.gmail.kovalev.dto.FacultyDTO;
 import com.gmail.kovalev.dto.FacultyInfoDTO;
 import com.gmail.kovalev.entity.Faculty;
 import com.gmail.kovalev.mapper.FacultyMapper;
+import com.gmail.kovalev.mapper.impl.FacultyMapperImpl;
 import com.gmail.kovalev.service.FacultyService;
-import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
 public class FacultyServiceImpl implements FacultyService {
 
     private final FacultyMapper mapper;
     private final FacultyDAO facultyDAO;
+
+    public FacultyServiceImpl() {
+        this.mapper = new FacultyMapperImpl();
+        this.facultyDAO = new FacultyDAOImpl();
+    }
 
     @Override
     public FacultyInfoDTO findFacultyById(UUID uuid) {
