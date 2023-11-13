@@ -1,18 +1,19 @@
 package com.gmail.kovalev.service;
 
-import com.gmail.kovalev.entity.Faculty;
+import com.gmail.kovalev.dto.FacultyDTO;
+import com.gmail.kovalev.dto.FacultyInfoDTO;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface FacultyService {
-    Faculty findFacultyById(UUID uuid);
+    FacultyInfoDTO findFacultyById(UUID uuid);
 
-    List<Faculty> findAllFaculties();
+    List<FacultyInfoDTO> findAllFaculties();
 
-    Faculty saveFaculty(Faculty faculty);
+    String saveFaculty(FacultyDTO facultyDTO);
 
-    Faculty updateFaculty(Faculty faculty);
+    String updateFaculty(UUID uuid, FacultyDTO facultyDTO);
 
     String deleteFacultyByUUID(UUID uuid);
 }

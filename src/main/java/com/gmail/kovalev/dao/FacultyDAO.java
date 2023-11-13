@@ -10,9 +10,9 @@ public interface FacultyDAO {
 
     List<Faculty> findAllFaculties();
 
-    Faculty saveFaculty(Faculty faculty);
+    String saveFaculty(Faculty faculty);
 
-    Faculty updateFaculty(Faculty faculty);
+    String updateFaculty(Faculty faculty);
 
     String deleteFacultyByUUID(UUID uuid);
 }
