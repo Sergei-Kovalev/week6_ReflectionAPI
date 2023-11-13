@@ -1,18 +1,18 @@
 package com.gmail.kovalev.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.experimental.FieldNameConstants;
 
 import java.util.UUID;
 
-@AllArgsConstructor
+@Data
+@Builder
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@AllArgsConstructor
+@FieldNameConstants
 public class Faculty {
 
     private UUID id;
@@ -22,11 +22,4 @@ public class Faculty {
     private Integer maxVisitors;
     private Double pricePerDay;
 
-    public Faculty(String name, String teacher, Integer actualVisitors, Integer maxVisitors, Double pricePerDay) {
-        this.name = name;
-        this.teacher = teacher;
-        this.actualVisitors = actualVisitors;
-        this.maxVisitors = maxVisitors;
-        this.pricePerDay = pricePerDay;
-    }
 }
