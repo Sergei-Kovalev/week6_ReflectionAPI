@@ -5,16 +5,16 @@ import com.gmail.kovalev.controller.Controller;
 public class Main {
     public static void main(String[] args) {
         Controller controller = new Controller();
-
-        String facultyById = controller.findFacultyById("773dcbc0-d2fa-45b4-acf8-485b682adedd");
-        System.out.println(facultyById);
-        System.out.println("------------------------------------------------------");
+//
+//        String facultyById = controller.findFacultyById("773dcbc0-d2fa-45b4-acf8-485b682adedd");
+//        System.out.println(facultyById);
+//        System.out.println("------------------------------------------------------");
 
         String allFaculties = controller.findAllFaculties();
         System.out.println(allFaculties);
         System.out.println("------------------------------------------------------");
 
-//
+
 //        String jsonForSave = """
 //                {
 //                  "name": "Economic",
@@ -30,7 +30,7 @@ public class Main {
 //        System.out.println(report1);
 //        System.out.println("------------------------------------------------------");
 
-//        String uuid = "773dcbc0-d2fa-45b4-acf8-485b682adedd";
+//        String uuid = "f9a06343-3187-4f0d-a7b5-d56dd608f261";
 //        String jsonForUpdate = """
 //                 {
 //                  "name": "Culture",
@@ -45,8 +45,8 @@ public class Main {
 //        String report2 = controller.updateFaculty(uuid, jsonForUpdate);
 //        System.out.println(report2);
 //        System.out.println("------------------------------------------------------");
-//
-//        String s = controller.deleteFacultyByUUID("c118621b-4e46-41b4-a872-a82eb21504e2");
+
+//        String s = controller.deleteFacultyByUUID("f9a06343-3187-4f0d-a7b5-d56dd608f261");
 //        System.out.println(s);
 //        System.out.println("------------------------------------------------------");
 

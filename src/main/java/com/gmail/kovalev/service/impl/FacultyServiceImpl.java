@@ -2,6 +2,7 @@ package com.gmail.kovalev.service.impl;
 
 import com.gmail.kovalev.dao.FacultyDAO;
 import com.gmail.kovalev.dao.impl.FacultyDAOImpl;
+import com.gmail.kovalev.dao.impl.FacultyDAOProxy;
 import com.gmail.kovalev.dto.FacultyDTO;
 import com.gmail.kovalev.dto.FacultyInfoDTO;
 import com.gmail.kovalev.entity.Faculty;
@@ -13,6 +14,7 @@ import com.gmail.kovalev.validator.FacultyInfoDTOValidator;
 import com.gmail.kovalev.validator.impl.FacultyDTOValidatorImpl;
 import com.gmail.kovalev.validator.impl.FacultyInfoDTOValidatorImpl;
 
+import java.lang.reflect.Proxy;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -26,7 +28,9 @@ public class FacultyServiceImpl implements FacultyService {
 
     public FacultyServiceImpl() {
         this.mapper = new FacultyMapperImpl();
-        this.facultyDAO = new FacultyDAOImpl();
+        this.facultyDAO = (FacultyDAO) Proxy.newProxyInstance(
+                FacultyDAO.class.getClassLoader(), new Class[] {FacultyDAO.class}, new FacultyDAOProxy(new FacultyDAOImpl()));
+//        this.facultyDAO = new FacultyDAOImpl();
         this.facultyDTOValidator = new FacultyDTOValidatorImpl();
         this.facultyInfoDTOValidator = new FacultyInfoDTOValidatorImpl();
     }
