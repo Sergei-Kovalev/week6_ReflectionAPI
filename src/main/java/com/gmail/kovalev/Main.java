@@ -5,14 +5,14 @@ import com.gmail.kovalev.controller.Controller;
 public class Main {
     public static void main(String[] args) {
         Controller controller = new Controller();
-//
-//        String facultyById = controller.findFacultyById("773dcbc0-d2fa-45b4-acf8-485b682adedd");
-//        System.out.println(facultyById);
-//        System.out.println("------------------------------------------------------");
 
-        String allFaculties = controller.findAllFaculties();
-        System.out.println(allFaculties);
+        String facultyById = controller.findFacultyById("773dcbc0-d2fa-45b4-acf8-485b682adedd");
+        System.out.println(facultyById);
         System.out.println("------------------------------------------------------");
+//
+//        String allFaculties = controller.findAllFaculties();
+//        System.out.println(allFaculties);
+//        System.out.println("------------------------------------------------------");
 
 
 //        String jsonForSave = """
