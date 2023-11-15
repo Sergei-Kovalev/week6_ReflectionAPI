@@ -1,4 +1,4 @@
-package com.gmail.kovalev.caches;
+package com.gmail.kovalev.cache;
 
 import com.gmail.kovalev.entity.Faculty;
 

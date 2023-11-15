@@ -1,7 +1,8 @@
 package com.gmail.kovalev.dao.impl;
 
-import com.gmail.kovalev.caches.Cache;
-import com.gmail.kovalev.caches.LFUCache;
+import com.gmail.kovalev.cache.Cache;
+import com.gmail.kovalev.cache.LFUCache;
+import com.gmail.kovalev.cache.LRUCache;
 import com.gmail.kovalev.config.Config;
 import com.gmail.kovalev.dao.FacultyDAO;
 import com.gmail.kovalev.entity.Faculty;
@@ -23,7 +24,7 @@ public class FacultyDAOProxy implements InvocationHandler {
         if (cacheType.equals("LFU")) {
             this.cache = new LFUCache(cacheCapacity);
         } else if (cacheType.equals("LRU")){
-            this.cache = new LFUCache(cacheCapacity);                                                           //TODO cache
+            this.cache = new LRUCache(cacheCapacity);
         } else {
             this.cache = null;
         }

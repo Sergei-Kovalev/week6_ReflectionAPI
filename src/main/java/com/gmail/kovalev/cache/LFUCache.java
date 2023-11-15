@@ -1,4 +1,4 @@
-package com.gmail.kovalev.caches;
+package com.gmail.kovalev.cache;
 
 import com.gmail.kovalev.entity.Faculty;
 
@@ -10,14 +10,14 @@ public class LFUCache implements Cache {
     HashMap<UUID, Faculty> values;
     HashMap<UUID, Integer> counts;
     HashMap<Integer, LinkedHashSet<UUID>> lists;
-    int cap;
+    int capacity;
     int min = -1;
 
     public LFUCache(int capacity) {
-        cap = capacity;
-        values = new HashMap<>();
-        counts = new HashMap<>();
-        lists = new HashMap<>();
+        this.capacity = capacity;
+        this.values = new HashMap<>();
+        this.counts = new HashMap<>();
+        this.lists = new HashMap<>();
         lists.put(1, new LinkedHashSet<>());
     }
 
@@ -41,14 +41,14 @@ public class LFUCache implements Cache {
 
     @Override
     public void set(UUID key, Faculty value) {
-        if (cap <= 0)
+        if (capacity <= 0)
             return;
         if (values.containsKey(key)) {
             values.put(key, value);
             get(key);
             return;
         }
-        if (values.size() >= cap) {
+        if (values.size() >= capacity) {
             UUID keyForDelete = lists.get(min).iterator().next();
             lists.get(min).remove(keyForDelete);
             values.remove(keyForDelete);
