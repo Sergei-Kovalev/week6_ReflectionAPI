@@ -49,7 +49,23 @@ public class Main {
 //        String s = controller.deleteFacultyByUUID("f9a06343-3187-4f0d-a7b5-d56dd608f261");
 //        System.out.println(s);
 //        System.out.println("------------------------------------------------------");
-
+//
+//
+//        String xmlForSave = """
+//                <?xml version="1.0" encoding="UTF-8"?>
+//                 <root>
+//                    <name>Pagonini Day</name>
+//                    <teacher>Santiago Dell Torro</teacher>
+//                    <email>santiDT@yahoo.com</email>
+//                    <actualVisitors>20</actualVisitors>
+//                    <maxVisitors>20</maxVisitors>
+//                    <pricePerDay>10.99</pricePerDay>
+//                 </root>
+//                """;
+//
+//        String report1 = controller.saveFacultyFromXML(xmlForSave);
+//        System.out.println(report1);
+//        System.out.println("------------------------------------------------------");
 
     }
 }
