@@ -1,11 +1,7 @@
 package com.gmail.kovalev.cache;
 
-import com.gmail.kovalev.entity.Faculty;
-
-import java.util.UUID;
-
-public interface Cache {
-    Faculty get(UUID key);
-    void set(UUID key, Faculty value);
-    void remove(UUID key);
+public interface Cache<K, V> {
+    V get(K key);
+    void set(K key, V value);
+    void remove(K key);
 }

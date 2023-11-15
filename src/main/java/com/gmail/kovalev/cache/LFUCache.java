@@ -1,15 +1,12 @@
 package com.gmail.kovalev.cache;
 
-import com.gmail.kovalev.entity.Faculty;
-
 import java.util.HashMap;
 import java.util.LinkedHashSet;
-import java.util.UUID;
 
-public class LFUCache implements Cache {
-    HashMap<UUID, Faculty> values;
-    HashMap<UUID, Integer> counts;
-    HashMap<Integer, LinkedHashSet<UUID>> lists;
+public class LFUCache<K, V> implements Cache<K, V> {
+    HashMap<K, V> values;
+    HashMap<K, Integer> counts;
+    HashMap<Integer, LinkedHashSet<K>> lists;
     int capacity;
     int min = -1;
 
@@ -22,7 +19,7 @@ public class LFUCache implements Cache {
     }
 
     @Override
-    public Faculty get(UUID key) {
+    public V get(K key) {
         if (!values.containsKey(key)) {
             return null;
         }
@@ -40,7 +37,7 @@ public class LFUCache implements Cache {
     }
 
     @Override
-    public void set(UUID key, Faculty value) {
+    public void set(K key, V value) {
         if (capacity <= 0)
             return;
         if (values.containsKey(key)) {
@@ -49,7 +46,7 @@ public class LFUCache implements Cache {
             return;
         }
         if (values.size() >= capacity) {
-            UUID keyForDelete = lists.get(min).iterator().next();
+            K keyForDelete = lists.get(min).iterator().next();
             lists.get(min).remove(keyForDelete);
             values.remove(keyForDelete);
             counts.remove(keyForDelete);
@@ -61,7 +58,7 @@ public class LFUCache implements Cache {
     }
 
     @Override
-    public void remove(UUID key) {
+    public void remove(K key) {
         Integer count = counts.get(key);
         values.remove(key);
         counts.remove(key);

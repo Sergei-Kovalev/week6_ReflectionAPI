@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class FacultyDAOProxy implements InvocationHandler {
     private final FacultyDAO facultyDAO;
-    private final Cache cache;
+    private final Cache<UUID, Faculty> cache;
 
     public FacultyDAOProxy(FacultyDAO facultyDAO) {
         this.facultyDAO = facultyDAO;
@@ -22,9 +22,9 @@ public class FacultyDAOProxy implements InvocationHandler {
         String cacheType = Config.getConfig().get("application").get("cache");
 
         if (cacheType.equals("LFU")) {
-            this.cache = new LFUCache(cacheCapacity);
+            this.cache = new LFUCache<>(cacheCapacity);
         } else if (cacheType.equals("LRU")){
-            this.cache = new LRUCache(cacheCapacity);
+            this.cache = new LRUCache<>(cacheCapacity);
         } else {
             this.cache = null;
         }

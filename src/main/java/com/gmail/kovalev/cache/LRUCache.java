@@ -1,19 +1,16 @@
 package com.gmail.kovalev.cache;
 
-import com.gmail.kovalev.entity.Faculty;
-
 import java.util.LinkedHashMap;
-import java.util.UUID;
 
-public class LRUCache implements Cache {
+public class LRUCache<K, V> implements Cache<K, V> {
     int capacity;
-    LinkedHashMap<UUID, Faculty> cache = new LinkedHashMap<>();
+    LinkedHashMap<K, V> cache = new LinkedHashMap<>();
     public LRUCache(int capacity) {
         this.capacity = capacity;
     }
 
     @Override
-    public Faculty get(UUID key) {
+    public V get(K key) {
         if (!cache.containsKey(key)) {
             return null;
         }
@@ -22,14 +19,14 @@ public class LRUCache implements Cache {
     }
 
     @Override
-    public void set(UUID key, Faculty value) {
+    public void set(K key, V value) {
         if (cache.containsKey(key)) {
             cache.remove(key);
             cache.put(key,value);
             return;
         }
         if (cache.size() >= capacity) {
-            UUID oldestKey = cache.keySet().iterator().next();
+            K oldestKey = cache.keySet().iterator().next();
             cache.remove(oldestKey);
 
         }
@@ -37,12 +34,12 @@ public class LRUCache implements Cache {
     }
 
     @Override
-    public void remove(UUID key) {
+    public void remove(K key) {
         cache.remove(key);
     }
 
-    private void makeRecently(UUID key){
-        Faculty val = cache.get(key);
+    private void makeRecently(K key){
+        V val = cache.get(key);
         cache.remove(key);
         cache.put(key,val);
     }
