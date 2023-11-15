@@ -1,5 +1,8 @@
 package com.gmail.kovalev.dao.impl;
 
+import com.gmail.kovalev.caches.Cache;
+import com.gmail.kovalev.caches.LFUCache;
+import com.gmail.kovalev.config.Config;
 import com.gmail.kovalev.dao.FacultyDAO;
 import com.gmail.kovalev.entity.Faculty;
 
@@ -9,9 +12,21 @@ import java.util.UUID;
 
 public class FacultyDAOProxy implements InvocationHandler {
     private final FacultyDAO facultyDAO;
+    private final Cache cache;
 
     public FacultyDAOProxy(FacultyDAO facultyDAO) {
         this.facultyDAO = facultyDAO;
+
+        int cacheCapacity = Integer.parseInt(Config.getConfig().get("application").get("collectionSize"));
+        String cacheType = Config.getConfig().get("application").get("cache");
+
+        if (cacheType.equals("LFU")) {
+            this.cache = new LFUCache(cacheCapacity);
+        } else if (cacheType.equals("LRU")){
+            this.cache = new LFUCache(cacheCapacity);                                                           //TODO cache
+        } else {
+            this.cache = null;
+        }
     }
 
     @Override
@@ -19,41 +34,35 @@ public class FacultyDAOProxy implements InvocationHandler {
         String methodName = method.getName();
         switch (methodName) {
             case "findFacultyById" -> {
-                System.out.println("Before - ищем в кэше, если там данных нет -");
-                Faculty faculty = (Faculty) method.invoke(facultyDAO, args);
-                System.out.println("After - сохраняем объект в кэш");
+                Faculty faculty = cache.get((UUID) args[0]);
+                if (faculty == null) {
+                    faculty = (Faculty) method.invoke(facultyDAO, args);
+                    cache.set(faculty.getId(), faculty);
+                }
                 return faculty;
             }
             case "findAllFaculties" -> {
                 System.out.println("""
-                        Пока тянем всё из базы.. думаю будет быстрее чем даже работа с кэш по принципу - вытянул оттуда - оставшееся из базы,
-                        тем более что на статистику запросов может неверно сказаться.. будет накрутка тем кто в кэше.
+                        Тянем всё из базы. Кэш не используется. Не рационально.
                         """);
                 return method.invoke(facultyDAO, args);
             }
             case "saveFaculty" -> {
-                System.out.println("Before - нет");
                 String message = (String) method.invoke(facultyDAO, args);
-                System.out.println("After - сохраняем объект в кэш");
-
                 String uuidString = message.substring(message.lastIndexOf(" ") + 1);
                 Faculty facultyForSaveToCache = facultyDAO.findFacultyById(UUID.fromString(uuidString));
-                System.out.println("Метод сохранения в кэш");
-
+                cache.set(facultyForSaveToCache.getId(), facultyForSaveToCache);
                 return message;
             }
             case "updateFaculty" -> {
-                System.out.println("Before - нет");
                 String message = (String) method.invoke(facultyDAO, args);
-                System.out.println("After - обновляем или добавляем объект в кэш/// логику здесь");
-
+                Faculty faculty = (Faculty) args[0];
+                cache.set(faculty.getId(), faculty);
                 return message;
             }
             case "deleteFacultyByUUID" -> {
-                System.out.println("Before - нет");
                 String message = (String) method.invoke(facultyDAO, args);
-                System.out.println("After - удаляем объект из кэша");
-
+                cache.remove((UUID) args[0]);
                 return message;
             }
         }
