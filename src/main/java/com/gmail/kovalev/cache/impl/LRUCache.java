@@ -1,4 +1,6 @@
-package com.gmail.kovalev.cache;
+package com.gmail.kovalev.cache.impl;
+
+import com.gmail.kovalev.cache.Cache;
 
 import java.util.LinkedHashMap;
 

@@ -1,8 +1,8 @@
 package com.gmail.kovalev.dao.impl;
 
 import com.gmail.kovalev.cache.Cache;
-import com.gmail.kovalev.cache.LFUCache;
-import com.gmail.kovalev.cache.LRUCache;
+import com.gmail.kovalev.cache.impl.LFUCache;
+import com.gmail.kovalev.cache.impl.LRUCache;
 import com.gmail.kovalev.config.Config;
 import com.gmail.kovalev.dao.FacultyDAO;
 import com.gmail.kovalev.entity.Faculty;
