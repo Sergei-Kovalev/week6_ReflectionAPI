@@ -35,6 +35,9 @@ dependencies {
 
     implementation 'org.aspectj:aspectjrt:1.9.20.1'
     implementation 'org.aspectj:aspectjweaver:1.9.20.1'
+
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.2'
+
 }
 
 test {

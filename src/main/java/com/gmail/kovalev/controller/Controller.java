@@ -1,5 +1,7 @@
 package com.gmail.kovalev.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.gmail.kovalev.dto.FacultyDTO;
 import com.gmail.kovalev.dto.FacultyInfoDTO;
 import com.gmail.kovalev.service.FacultyService;
@@ -12,14 +14,15 @@ import java.util.UUID;
 
 public class Controller {
     private final FacultyService service;
-
     private final Gson gson;
+    private final XmlMapper xmlMapper;
 
     public Controller() {
         this.service = new FacultyServiceImpl();
         this.gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
+        this.xmlMapper = new XmlMapper();
     }
 
     public String findFacultyById(String uuidString) {
@@ -50,6 +53,21 @@ public class Controller {
         UUID uuid = UUID.fromString(uuidString);
         String message = service.deleteFacultyByUUID(uuid);
         return gson.toJson(message);
+    }
+
+    public String saveFacultyFromXML(String facultyDTOXml) {
+        FacultyDTO facultyDTO;
+        try {
+            facultyDTO = xmlMapper.readValue(facultyDTOXml, FacultyDTO.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        String message = service.saveFaculty(facultyDTO);
+        try {
+            return xmlMapper.writeValueAsString(message);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
