@@ -6,15 +6,17 @@ public class Main {
     public static void main(String[] args) {
         Controller controller = new Controller();
 
+        //*****************БЛОК ДЛЯ ПОЛУЧЕНИЯ ПО ID************************
         String facultyById = controller.findFacultyById("773dcbc0-d2fa-45b4-acf8-485b682adedd");
         System.out.println(facultyById);
         System.out.println("------------------------------------------------------");
-//
+
+        //*****************БЛОК ДЛЯ ПОЛУЧЕНИЯ ВСЕХ ИЗ БД************************
 //        String allFaculties = controller.findAllFaculties();
 //        System.out.println(allFaculties);
 //        System.out.println("------------------------------------------------------");
 
-
+        //*****************БЛОК ДЛЯ СОХРАНЕНИЯ НОВОГО ИЗ JSON************************
 //        String jsonForSave = """
 //                {
 //                  "name": "Economic",
@@ -30,7 +32,8 @@ public class Main {
 //        System.out.println(report1);
 //        System.out.println("------------------------------------------------------");
 
-//        String uuid = "f9a06343-3187-4f0d-a7b5-d56dd608f261";
+        //*****************БЛОК ДЛЯ ОБНОВЛЕНИЯ ИЗ JSON************************
+//        String uuid = "773dcbc0-d2fa-45b4-acf8-485b682adedd";
 //        String jsonForUpdate = """
 //                 {
 //                  "name": "Culture",
@@ -46,11 +49,13 @@ public class Main {
 //        System.out.println(report2);
 //        System.out.println("------------------------------------------------------");
 
-//        String s = controller.deleteFacultyByUUID("f9a06343-3187-4f0d-a7b5-d56dd608f261");
+        //*****************БЛОК ДЛЯ УДАЛЕНИЯ************************
+//        String s = controller.deleteFacultyByUUID("8d8cfc84-e77c-4722-b4d6-8e9fdc17c721");
 //        System.out.println(s);
 //        System.out.println("------------------------------------------------------");
 //
-//
+
+        //*****************БЛОК ДЛЯ СОХРАНЕНИЯ НОВОГО ИЗ XML************************
 //        String xmlForSave = """
 //                <?xml version="1.0" encoding="UTF-8"?>
 //                 <root>
@@ -66,6 +71,5 @@ public class Main {
 //        String report1 = controller.saveFacultyFromXML(xmlForSave);
 //        System.out.println(report1);
 //        System.out.println("------------------------------------------------------");
-
     }
 }

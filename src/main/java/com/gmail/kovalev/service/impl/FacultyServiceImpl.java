@@ -19,13 +19,41 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * @author Sergey Kovalev
+ * реализация интерфейсов и его методов:
+ * @see FacultyService
+ */
 public class FacultyServiceImpl implements FacultyService {
 
+    /**
+     * Это поле для загрузки маппеоа.
+     * @see FacultyMapper
+     */
     private final FacultyMapper mapper;
+
+    /**
+     * Это поле для загрузки dao, получающего данные из БД.
+     * @see FacultyDAO
+     */
     private final FacultyDAO facultyDAO;
+
+    /**
+     * Это поле для загрузки валидатора для {@link FacultyDTO}.
+     * @see FacultyDTOValidator
+     */
     private final FacultyDTOValidator facultyDTOValidator;
+
+    /**
+     * Это поле для загрузки валидатора для {@link FacultyInfoDTO}.
+     * @see FacultyInfoDTOValidator
+     */
     private final FacultyInfoDTOValidator facultyInfoDTOValidator;
 
+    /**
+     * Конструктор класса. Загружает необходимые имплементации сервисов.
+     * facultyDAO тянет прокси объект
+     */
     public FacultyServiceImpl() {
         this.mapper = new FacultyMapperImpl();
         this.facultyDAO = (FacultyDAO) Proxy.newProxyInstance(
@@ -35,6 +63,11 @@ public class FacultyServiceImpl implements FacultyService {
         this.facultyInfoDTOValidator = new FacultyInfoDTOValidatorImpl();
     }
 
+    /**
+     * Метод для получения объекта {@link FacultyInfoDTO} для передачи на фронт(UI)
+     * @param uuid - принимает id факультатива
+     * @return объект для передачи на фронт
+     */
     @Override
     public FacultyInfoDTO findFacultyById(UUID uuid) {
         Faculty faculty = facultyDAO.findFacultyById(uuid);
@@ -42,6 +75,10 @@ public class FacultyServiceImpl implements FacultyService {
         return facultyInfoDTOValidator.validate(facultyInfoDTO);
     }
 
+    /**
+     * Метод для получения всех объектов {@link FacultyInfoDTO} для передачи на фронт(UI)
+     * @return список объектов
+     */
     @Override
     public List<FacultyInfoDTO> findAllFaculties() {
         return facultyDAO.findAllFaculties().stream()
@@ -50,6 +87,11 @@ public class FacultyServiceImpl implements FacultyService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Метод для сохранения нового объекта в БД
+     * @param facultyDTO - объект для сохранения {@link FacultyDTO}
+     * @return строку об успешном сохранении
+     */
     @Override
     public String saveFaculty(FacultyDTO facultyDTO) {
         FacultyDTO validated = facultyDTOValidator.validate(facultyDTO);
@@ -57,6 +99,12 @@ public class FacultyServiceImpl implements FacultyService {
         return facultyDAO.saveFaculty(faculty);
     }
 
+    /**
+     * Метод для обновления уже существующего объекта
+     * @param uuid - id объекта в БД
+     * @param facultyDTO - объект с обновлёнными данными
+     * @return строку об успешном обновлении
+     */
     @Override
     public String updateFaculty(UUID uuid, FacultyDTO facultyDTO) {
         FacultyDTO validated = facultyDTOValidator.validate(facultyDTO);
@@ -64,6 +112,11 @@ public class FacultyServiceImpl implements FacultyService {
         return facultyDAO.updateFaculty(faculty);
     }
 
+    /**
+     * Метод для удаления объекта из БД
+     * @param uuid - id объекта в БД
+     * @return - строку об успешном удалении
+     */
     @Override
     public String deleteFacultyByUUID(UUID uuid) {
         return facultyDAO.deleteFacultyByUUID(uuid);

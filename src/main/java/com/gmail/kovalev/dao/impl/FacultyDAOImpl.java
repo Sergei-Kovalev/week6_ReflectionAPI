@@ -18,12 +18,10 @@ public class FacultyDAOImpl implements FacultyDAO {
 
     private final static String FIND_BY_ID = "SELECT * FROM faculties WHERE id = ?";
     private final static String FIND_ALL = "SELECT * FROM faculties";
-
     private final static String SAVE_NEW_FACULTY = """
             INSERT INTO faculties(id, name, teacher, email, actual_visitors, max_visitors, price_per_day)
             VALUES (?, ?, ?, ?, ?, ?, ?);
             """;
-
     private final static String UPDATE_FACULTY = """
             UPDATE faculties
             SET name = ?, teacher = ?, email = ?, actual_visitors = ?, max_visitors = ?, price_per_day = ?
@@ -50,7 +48,6 @@ public class FacultyDAOImpl implements FacultyDAO {
         }
         return faculty;
     }
-
 
     @Override
     public List<Faculty> findAllFaculties() {

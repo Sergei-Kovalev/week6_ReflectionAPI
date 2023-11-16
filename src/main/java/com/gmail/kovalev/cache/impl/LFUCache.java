@@ -5,11 +5,35 @@ import com.gmail.kovalev.cache.Cache;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 
+/**
+ * Объект для создания LFU кэша
+ * @param <K> - объект ключа
+ * @param <V> - объект значения
+ */
 public class LFUCache<K, V> implements Cache<K, V> {
+
+    /**
+     * содержит пары ключ - значение
+     */
     HashMap<K, V> values;
+
+    /**
+     * содержит пары ключ - количество обращений
+     */
     HashMap<K, Integer> counts;
+
+    /**
+     * содержит пары количество обращений - связанный список ключей (в порядке добавления)
+     */
     HashMap<Integer, LinkedHashSet<K>> lists;
+    /**
+     * вместимость кэша (количество объектов для хранения)
+     */
     int capacity;
+
+    /**
+     * Индекс в lists, где содержатся объекты с минимальным количеством обращений
+     */
     int min = -1;
 
     public LFUCache(int capacity) {
@@ -20,6 +44,12 @@ public class LFUCache<K, V> implements Cache<K, V> {
         lists.put(1, new LinkedHashSet<>());
     }
 
+    /**
+     * Метод для получения объекта
+     * @param key - объект ключа
+     * @return объект
+     * + обновляет счётчик обращений путём переноса в другую LinkedHashSet
+     */
     @Override
     public V get(K key) {
         if (!values.containsKey(key)) {
@@ -38,6 +68,11 @@ public class LFUCache<K, V> implements Cache<K, V> {
         return values.get(key);
     }
 
+    /**
+     * Метод для добавления объекта либо обновления его по ключу
+     * @param key - объект ключа
+     * @param value - объект значения
+     */
     @Override
     public void set(K key, V value) {
         if (capacity <= 0)
@@ -59,6 +94,10 @@ public class LFUCache<K, V> implements Cache<K, V> {
         lists.get(1).add(key);
     }
 
+    /**
+     * Метод для удаления объекта из кэша
+     * @param key - объект ключа
+     */
     @Override
     public void remove(K key) {
         Integer count = counts.get(key);

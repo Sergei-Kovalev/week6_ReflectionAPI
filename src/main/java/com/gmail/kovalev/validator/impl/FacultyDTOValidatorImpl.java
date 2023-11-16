@@ -4,8 +4,22 @@ import com.gmail.kovalev.dto.FacultyDTO;
 import com.gmail.kovalev.exception.FacultyDTOFormatException;
 import com.gmail.kovalev.validator.FacultyDTOValidator;
 
+/**
+ * @author Sergey Kovalev
+ * Класс для валидации класса:
+ * @see FacultyDTO
+ * и имплементирующий интерфейс:
+ * @see FacultyDTOValidator
+ */
 public class FacultyDTOValidatorImpl implements FacultyDTOValidator {
 
+    /**
+     * Общий метод для валидации объекта.
+     * @param facultyDTO - принимает объект для валидации
+     * @return проверенный объект
+     * Условия валидности - смотри в описании объекта:
+     * @see FacultyDTO
+     */
     public FacultyDTO validate(FacultyDTO facultyDTO) {
         checkName(facultyDTO.name());
         checkTeacher(facultyDTO.teacher());
@@ -16,7 +30,11 @@ public class FacultyDTOValidatorImpl implements FacultyDTOValidator {
         return facultyDTO;
     }
 
-
+    /**
+     * Метод для проверки поля name
+     * @param name - название факультатива.
+     * @throws FacultyDTOFormatException - в случае невалидности поля.
+     */
     private static void checkName(String name) throws FacultyDTOFormatException {
         if (!name.matches("[a-zA-Zа-яёА-ЯЁ\\s]{1,30}")) {
             throw new FacultyDTOFormatException(
@@ -25,6 +43,11 @@ public class FacultyDTOValidatorImpl implements FacultyDTOValidator {
         }
     }
 
+    /**
+     * Метод для проверки поля teacher
+     * @param teacher - ФИО преподавателя
+     * @throws FacultyDTOFormatException - в случае невалидности поля.
+     */
     private static void checkTeacher(String teacher) throws FacultyDTOFormatException {
         if (!teacher.matches("[a-zA-Zа-яёА-ЯЁ\\s]{1,50}")) {
             throw new FacultyDTOFormatException(
@@ -33,6 +56,11 @@ public class FacultyDTOValidatorImpl implements FacultyDTOValidator {
         }
     }
 
+    /**
+     * Метод для проверки поля email
+     * @param email - эл. почта преподавателя
+     * @throws FacultyDTOFormatException - в случае невалидности поля.
+     */
     private static void checkEmail(String email) {
         if (!email.matches("^[\\w_-]+@[\\w_-]+\\.[a-z]{2,}$")) {
             throw new FacultyDTOFormatException(
@@ -41,6 +69,11 @@ public class FacultyDTOValidatorImpl implements FacultyDTOValidator {
         }
     }
 
+    /**
+     * Метод для проверки поля actualVisitors
+     * @param actualVisitors - количество записавшихся студентов
+     * @throws FacultyDTOFormatException - в случае невалидности поля.
+     */
     private static void checkActualVisitors(Integer actualVisitors, Integer maxVisitors) throws FacultyDTOFormatException {
         if (actualVisitors == null) {
             throw new FacultyDTOFormatException(
@@ -59,6 +92,11 @@ public class FacultyDTOValidatorImpl implements FacultyDTOValidator {
         }
     }
 
+    /**
+     * Метод для проверки поля maxVisitors
+     * @param maxVisitors - количество записавшихся студентов
+     * @throws FacultyDTOFormatException - в случае невалидности поля.
+     */
     private static void checkMaxVisitors(Integer maxVisitors) throws FacultyDTOFormatException {
         if (maxVisitors == null) {
             throw new FacultyDTOFormatException(
@@ -77,6 +115,11 @@ public class FacultyDTOValidatorImpl implements FacultyDTOValidator {
         }
     }
 
+    /**
+     * Метод для проверки поля pricePerDay
+     * @param pricePerDay - цена за 1 посещение.
+     * @throws FacultyDTOFormatException - в случае невалидности поля.
+     */
     private static void checkPricePerDay(Double pricePerDay) throws FacultyDTOFormatException {
         if (pricePerDay == null) {
             throw new FacultyDTOFormatException(

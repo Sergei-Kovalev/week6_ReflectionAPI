@@ -6,7 +6,21 @@ import com.gmail.kovalev.validator.FacultyInfoDTOValidator;
 
 import java.util.UUID;
 
+/**
+ * @author Sergey Kovalev
+ * Класс для валидации класса:
+ * @see FacultyInfoDTO
+ * и имплементирующий интерфейс:
+ * @see FacultyInfoDTOValidator
+ */
 public class FacultyInfoDTOValidatorImpl implements FacultyInfoDTOValidator {
+    /**
+     * Общий метод для валидации объекта.
+     * @param facultyInfoDTO - принимает объект для валидации
+     * @return проверенный объект
+     * Условия валидности - смотри в описании объекта:
+     * @see FacultyInfoDTO
+     */
     @Override
     public FacultyInfoDTO validate(FacultyInfoDTO facultyInfoDTO) {
         checkUuid(facultyInfoDTO.id());
@@ -18,6 +32,11 @@ public class FacultyInfoDTOValidatorImpl implements FacultyInfoDTOValidator {
         return facultyInfoDTO;
     }
 
+    /**
+     * Метод для проверки поля id
+     * @param id - UUID объекта.
+     * @throws FacultyInfoDTOFormatException - в случае невалидности поля.
+     */
     private static void checkUuid(UUID id) throws FacultyInfoDTOFormatException {
         if (id == null) {
             throw new FacultyInfoDTOFormatException(
@@ -25,7 +44,11 @@ public class FacultyInfoDTOValidatorImpl implements FacultyInfoDTOValidator {
             );
         }
     }
-
+    /**
+     * Метод для проверки поля name
+     * @param name - название факультатива.
+     * @throws FacultyInfoDTOFormatException - в случае невалидности поля.
+     */
     private static void checkName(String name) throws FacultyInfoDTOFormatException {
         if (!name.matches("[a-zA-Zа-яёА-ЯЁ\\s]{1,30}")) {
             throw new FacultyInfoDTOFormatException(
@@ -34,6 +57,11 @@ public class FacultyInfoDTOValidatorImpl implements FacultyInfoDTOValidator {
         }
     }
 
+    /**
+     * Метод для проверки поля teacher
+     * @param teacher - ФИО преподавателя
+     * @throws FacultyInfoDTOFormatException - в случае невалидности поля.
+     */
     private static void checkTeacher(String teacher) throws FacultyInfoDTOFormatException {
         if (!teacher.matches("[a-zA-Zа-яёА-ЯЁ\\s]{1,50}")) {
             throw new FacultyInfoDTOFormatException(
@@ -42,6 +70,11 @@ public class FacultyInfoDTOValidatorImpl implements FacultyInfoDTOValidator {
         }
     }
 
+    /**
+     * Метод для проверки поля email
+     * @param email - эл. почта преподавателя
+     * @throws FacultyInfoDTOFormatException - в случае невалидности поля.
+     */
     private static void checkEmail(String email) throws FacultyInfoDTOFormatException {
         if (!email.matches("^[\\w_-]+@[\\w_-]+\\.[a-z]{2,}$")) {
             throw new FacultyInfoDTOFormatException(
@@ -50,6 +83,11 @@ public class FacultyInfoDTOValidatorImpl implements FacultyInfoDTOValidator {
         }
     }
 
+    /**
+     * Метод для проверки поля freePlaces
+     * @param freePlaces - количество свободных мест на факультативе
+     * @throws FacultyInfoDTOFormatException - в случае невалидности поля.
+     */
     private static void checkFreePlaces(Integer freePlaces) throws FacultyInfoDTOFormatException {
         if (freePlaces < 0) {
             throw new FacultyInfoDTOFormatException(
@@ -58,6 +96,11 @@ public class FacultyInfoDTOValidatorImpl implements FacultyInfoDTOValidator {
         }
     }
 
+    /**
+     * Метод для проверки поля pricePerDay
+     * @param pricePerDay - цена за 1 посещение.
+     * @throws FacultyInfoDTOFormatException - в случае невалидности поля.
+     */
     private void checkPricePerDay(Double pricePerDay) throws FacultyInfoDTOFormatException {
         if (pricePerDay == null) {
             throw new FacultyInfoDTOFormatException(
