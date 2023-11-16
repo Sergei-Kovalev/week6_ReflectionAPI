@@ -108,6 +108,7 @@ public class FacultyDAOImpl implements FacultyDAO {
 
     @Override
     public String deleteFacultyByUUID(UUID uuid) {
+        // логикой на проверку есть ли такой объект в базе не нагружал...
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement(DELETE_BY_ID);
             statement.setObject(1, uuid);
