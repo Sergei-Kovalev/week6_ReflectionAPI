@@ -1,0 +1,8 @@
+db:
+  url: jdbc:postgresql://localhost:5432/faculty_db
+  login: postgres
+  password: '193233'
+
+application:
+  cache: LRU
+  collectionSize: '10'
