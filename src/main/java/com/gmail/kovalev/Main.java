@@ -11,6 +11,7 @@ public class Main {
         System.out.println(facultyById);
         System.out.println("------------------------------------------------------");
 
+//
 //        //*****************БЛОК ДЛЯ ПОЛУЧЕНИЯ ВСЕХ ИЗ БД************************
 //        String allFaculties = controller.findAllFaculties();
 //        System.out.println(allFaculties);
