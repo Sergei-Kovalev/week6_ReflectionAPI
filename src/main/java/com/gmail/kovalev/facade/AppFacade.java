@@ -37,8 +37,8 @@ public class AppFacade {
                 }
                 """;
 
-        String report1 = controller.saveFaculty(jsonForSave);
-        System.out.println(report1);
+        String report = controller.saveFaculty(jsonForSave);
+        System.out.println(report);
         System.out.println("------------------------------------------------------");
     }
 
@@ -55,8 +55,8 @@ public class AppFacade {
                   "pricePerDay": 9.99
                  }
                 """;
-        String report2 = controller.updateFaculty(uuid, jsonForUpdate);
-        System.out.println(report2);
+        String report = controller.updateFaculty(uuid, jsonForUpdate);
+        System.out.println(report);
         System.out.println("------------------------------------------------------");
     }
 
@@ -81,8 +81,14 @@ public class AppFacade {
                  </root>
                 """;
 
-        String report1 = controller.saveFacultyFromXML(xmlForSave);
-        System.out.println(report1);
+        String report = controller.saveFacultyFromXML(xmlForSave);
+        System.out.println(report);
+        System.out.println("------------------------------------------------------");
+    }
+
+    public void rollbackDeletedFaculty() {
+        String report = controller.rollbackDeletedFaculty();
+        System.out.println(report);
         System.out.println("------------------------------------------------------");
     }
 }

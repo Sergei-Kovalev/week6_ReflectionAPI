@@ -54,6 +54,9 @@ public class FacultyDAOProxy implements InvocationHandler {
                 cache.remove((UUID) args[0]);
                 return message;
             }
+            case "rollbackDeletedFaculty" -> {
+                return method.invoke(facultyDAO, args);
+            }
         }
         return methodName;
     }

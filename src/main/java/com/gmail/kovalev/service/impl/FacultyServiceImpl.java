@@ -132,4 +132,9 @@ public class FacultyServiceImpl implements FacultyService {
     public String deleteFacultyByUUID(UUID uuid) {
         return facultyDAO.deleteFacultyByUUID(uuid);
     }
+
+    @Override
+    public String rollbackDeletedFaculty() {
+        return facultyDAO.rollbackDeletedFaculty();
+    }
 }
