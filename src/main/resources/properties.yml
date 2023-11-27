@@ -6,3 +6,4 @@ db:
 application:
   cache: LRU
   collectionSize: '10'
+  saving strategy: pdf

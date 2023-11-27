@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         AppFacade facade = new AppFacade();
 
-//        facade.findByIdSample();
+        facade.findByIdSample();
 
 //        facade.findAllSample();
 

@@ -9,7 +9,7 @@ import com.gmail.kovalev.entity.Faculty;
 import com.gmail.kovalev.mapper.FacultyMapper;
 import com.gmail.kovalev.mapper.FacultyMapperImpl;
 import com.gmail.kovalev.service.FacultyService;
-import com.gmail.kovalev.util.FacultyCardPDFGenerator;
+import com.gmail.kovalev.util.FacultyCardGenerator;
 import com.gmail.kovalev.validator.FacultyDTOValidator;
 import com.gmail.kovalev.validator.FacultyInfoDTOValidator;
 import com.gmail.kovalev.validator.impl.FacultyDTOValidatorImpl;
@@ -53,9 +53,9 @@ public class FacultyServiceImpl implements FacultyService {
 
     /**
      * Это поле для загрузки генератора PDF страницы с карточкой факультета.
-     * @see FacultyCardPDFGenerator
+     * @see FacultyCardGenerator
      */
-    private final FacultyCardPDFGenerator facultyCardPDFGenerator;
+    private final FacultyCardGenerator facultyCardPDFGenerator;
 
     /**
      * Конструктор класса. Загружает необходимые имплементации сервисов.
@@ -68,7 +68,7 @@ public class FacultyServiceImpl implements FacultyService {
 //        this.facultyDAO = new FacultyDAOImpl();
         this.facultyDTOValidator = new FacultyDTOValidatorImpl();
         this.facultyInfoDTOValidator = new FacultyInfoDTOValidatorImpl();
-        this.facultyCardPDFGenerator = new FacultyCardPDFGenerator();
+        this.facultyCardPDFGenerator = new FacultyCardGenerator();
     }
 
     /**
