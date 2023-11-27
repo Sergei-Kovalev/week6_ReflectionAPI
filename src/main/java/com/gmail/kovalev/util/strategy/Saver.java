@@ -1,4 +1,4 @@
-package com.gmail.kovalev.util.saver;
+package com.gmail.kovalev.util.strategy;
 
 import java.io.File;
 

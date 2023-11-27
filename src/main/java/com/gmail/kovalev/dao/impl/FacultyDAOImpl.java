@@ -168,9 +168,9 @@ public class FacultyDAOImpl implements FacultyDAO {
             throw new RuntimeException(e);
         }
         return DriverManager.getConnection(
-                Config.getConfig().get("db").get("url"),
-                Config.getConfig().get("db").get("login"),
-                Config.getConfig().get("db").get("password")
+                Config.getInstance().config.get("db").get("url"),
+                Config.getInstance().config.get("db").get("login"),
+                Config.getInstance().config.get("db").get("password")
         );
     }
 }

@@ -1,4 +1,6 @@
-package com.gmail.kovalev.util.saver;
+package com.gmail.kovalev.util;
+
+import com.gmail.kovalev.util.strategy.Saver;
 
 import java.io.BufferedWriter;
 import java.io.File;

@@ -1,4 +1,4 @@
-package com.gmail.kovalev.util.saver;
+package com.gmail.kovalev.util.strategy;
 
 import com.gmail.kovalev.util.decorator.ConsoleOutput;
 import com.gmail.kovalev.util.decorator.VisualizeConsoleOutput;

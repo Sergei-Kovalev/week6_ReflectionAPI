@@ -8,7 +8,7 @@ import com.gmail.kovalev.config.Config;
 public class LFUCacheFactory implements CacheFactory {
     @Override
     public <K, V> Cache<K, V> createCache() {
-        int cacheCapacity = Integer.parseInt(Config.getConfig().get("application").get("collectionSize"));
+        int cacheCapacity = Integer.parseInt(Config.getInstance().config.get("application").get("collectionSize"));
         return new LFUCache<>(cacheCapacity);
     }
 }

@@ -1,6 +1,6 @@
 package com.gmail.kovalev.util.decorator;
 
-import com.gmail.kovalev.util.saver.Saver;
+import com.gmail.kovalev.util.strategy.Saver;
 
 import java.io.File;
 

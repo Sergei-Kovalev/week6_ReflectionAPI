@@ -1,6 +1,7 @@
-package com.gmail.kovalev.util.saver;
+package com.gmail.kovalev.util;
 
 import com.gmail.kovalev.exception.PDFTemplateNotFoundException;
+import com.gmail.kovalev.util.strategy.Saver;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;

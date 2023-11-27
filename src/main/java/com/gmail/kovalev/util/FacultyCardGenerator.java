@@ -3,9 +3,7 @@ package com.gmail.kovalev.util;
 import com.gmail.kovalev.config.Config;
 import com.gmail.kovalev.dto.FacultyInfoDTO;
 import com.gmail.kovalev.exception.SaverNotFoundException;
-import com.gmail.kovalev.util.saver.Context;
-import com.gmail.kovalev.util.saver.SaveToPDF;
-import com.gmail.kovalev.util.saver.SaveToTXT;
+import com.gmail.kovalev.util.strategy.Context;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -44,7 +42,7 @@ public class FacultyCardGenerator {
         String[] strings = generateFacultyCard(facultyInfoDTO).split("\n");
 
         Context context = new Context();
-        String strategy = Config.getConfig().get("application").get("saving strategy");
+        String strategy = Config.getInstance().config.get("application").get("saving strategy");
         if (strategy.equalsIgnoreCase("pdf")) {
             context.setSaver(new SaveToPDF());
             context.executeSaving(filePath, fileName, strings);
