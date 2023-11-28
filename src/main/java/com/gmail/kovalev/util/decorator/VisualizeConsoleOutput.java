@@ -9,7 +9,7 @@ public class VisualizeConsoleOutput extends SaverDecorator {
         super(saver);
     }
 
-    public void beautifyOutput() {
+    private void beautifyOutput() {
         System.out.println("------------------------------------------------");
     }
 

@@ -22,11 +22,16 @@ public class FacultyCardGenerator {
              Стоимость 1-го занятия:    | %s
              ---------------------------------------------------------------------
             """;
+    private static final String CURRENCY = " BYN";
+    private static final String DIRECTORY_NAME = "faculty_cards";
 
-    private static String generateFacultyCard(FacultyInfoDTO facultyInfoDTO) {
+    private String generateFacultyCard(FacultyInfoDTO facultyInfoDTO) {
+        if (facultyInfoDTO == null) {
+            return "There is no such faculty in the database.";
+        }
         return String.format(FACULTY_CARD_TEMPLATE,
                 facultyInfoDTO.id(), facultyInfoDTO.name(), facultyInfoDTO.teacher(), facultyInfoDTO.email(),
-                facultyInfoDTO.freePlaces(), facultyInfoDTO.pricePerDay() + " BYN");
+                facultyInfoDTO.freePlaces(), facultyInfoDTO.pricePerDay() + CURRENCY);
     }
 
     public void facultyCardOutputInFile(FacultyInfoDTO facultyInfoDTO) {
@@ -35,7 +40,7 @@ public class FacultyCardGenerator {
                 facultyInfoDTO.name() + " card actualize " + timeCreated.getYear() + " "
                         + timeCreated.getMonth() + " " + timeCreated.getDayOfMonth() + " " +
                         timeCreated.getHour() + "h " + timeCreated.getMinute() + "m").replace(" ", "_");
-        File filePath = new File("faculty_cards");
+        File filePath = new File(DIRECTORY_NAME);
         filePath.mkdir();
 
         deleteOldFileVersion(facultyInfoDTO, filePath);
@@ -54,7 +59,7 @@ public class FacultyCardGenerator {
         }
     }
 
-    private static void deleteOldFileVersion(FacultyInfoDTO facultyInfoDTO, File filePath) {
+    private void deleteOldFileVersion(FacultyInfoDTO facultyInfoDTO, File filePath) {
         File[] files = filePath.listFiles();
         if (files != null) {
             Arrays.stream(files).forEach(file -> {
