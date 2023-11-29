@@ -14,6 +14,7 @@ import com.gmail.kovalev.validator.FacultyDTOValidator;
 import com.gmail.kovalev.validator.FacultyInfoDTOValidator;
 import com.gmail.kovalev.validator.impl.FacultyDTOValidatorImpl;
 import com.gmail.kovalev.validator.impl.FacultyInfoDTOValidatorImpl;
+import lombok.RequiredArgsConstructor;
 
 import java.lang.reflect.Proxy;
 import java.util.List;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
  * реализация интерфейсов и его методов:
  * @see FacultyService
  */
+@RequiredArgsConstructor
 public class FacultyServiceImpl implements FacultyService {
 
     /**
