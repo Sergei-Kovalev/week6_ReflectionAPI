@@ -21,7 +21,7 @@ public class ForAllServlet extends HttpServlet {
     FacultyService facultyService;
     private Gson gson;
 
-    private final int pageSize = Integer.parseInt(Config.getInstance().config.get("application").get("page size"));
+    private int pageSize;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -30,6 +30,12 @@ public class ForAllServlet extends HttpServlet {
         this.gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
+        String size = Config.getInstance().config.get("application").get("page size");
+        if (size == null) {
+            pageSize = 20;
+        } else {
+            pageSize = Integer.parseInt(size);
+        }
     }
 
     @Override

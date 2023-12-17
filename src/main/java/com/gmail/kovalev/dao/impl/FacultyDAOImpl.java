@@ -126,9 +126,11 @@ public class FacultyDAOImpl implements FacultyDAO {
 
     @Override
     public String deleteFacultyByUUID(UUID uuid) {
-        // логикой на проверку есть ли такой объект в базе не нагружал...
-
-        faculty = findFacultyById(uuid);
+        try {
+            faculty = findFacultyById(uuid);
+        } catch (FacultyNotFoundException e) {
+            return e.getMessage();
+        }
         storage.setSave(saveCurrentVersion(faculty));
 
         try (Connection connection = getConnection()) {

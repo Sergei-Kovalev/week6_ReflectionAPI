@@ -62,7 +62,7 @@ public class AppFacade {
 
     public void deleteSample() {
         //*****************БЛОК ДЛЯ УДАЛЕНИЯ************************
-        String s = controller.deleteFacultyByUUID("8d8cfc84-e77c-4722-b4d6-8e9fdc17c721");
+        String s = controller.deleteFacultyByUUID("da1a2959-363b-477e-ab23-66ef983a7568");
         System.out.println(s);
         System.out.println("------------------------------------------------------");
     }
