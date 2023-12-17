@@ -19,7 +19,7 @@ public class AppFacade {
 
     public void findAllSample() {
         //*****************БЛОК ДЛЯ ПОЛУЧЕНИЯ ВСЕХ ИЗ БД************************
-        String allFaculties = controller.findAllFaculties();
+        String allFaculties = controller.findAllFaculties(1, 20);
         System.out.println(allFaculties);
         System.out.println("------------------------------------------------------");
     }

@@ -26,7 +26,11 @@ public class FacultyDAOImpl implements FacultyDAO {
     }
 
     private final static String FIND_BY_ID = "SELECT * FROM faculties WHERE id = ?";
-    private final static String FIND_ALL = "SELECT * FROM faculties";
+    private final static String FIND_ALL = """
+            SELECT * FROM faculties
+            LIMIT ?
+            OFFSET ?
+            """;
     private final static String SAVE_NEW_FACULTY = """
             INSERT INTO faculties(id, name, teacher, email, actual_visitors, max_visitors, price_per_day)
             VALUES (?, ?, ?, ?, ?, ?, ?);
@@ -59,10 +63,12 @@ public class FacultyDAOImpl implements FacultyDAO {
     }
 
     @Override
-    public List<Faculty> findAllFaculties() {
+    public List<Faculty> findAllFaculties(int page, int pageSize) {
         List<Faculty> allFaculties = new ArrayList<>();
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement(FIND_ALL);
+            statement.setObject(1, pageSize);
+            statement.setObject(2, (page - 1) * pageSize);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Faculty faculty = new Faculty();
