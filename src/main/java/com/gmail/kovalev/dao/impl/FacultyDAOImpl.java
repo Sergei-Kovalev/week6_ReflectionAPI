@@ -44,7 +44,7 @@ public class FacultyDAOImpl implements FacultyDAO {
     private final static String DELETE_BY_ID = "DELETE FROM faculties WHERE id = ?";
 
     @Override
-    public Faculty findFacultyById(UUID uuid) {
+    public Faculty findFacultyById(UUID uuid) throws FacultyNotFoundException {
         Faculty faculty = new Faculty();
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement(FIND_BY_ID);
